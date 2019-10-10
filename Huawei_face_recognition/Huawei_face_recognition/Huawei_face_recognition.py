@@ -1,7 +1,9 @@
 
 import requests
 import base64
-with open("C:/image.jpg", "rb") as img_file:
+image_base="C:/base_image.jpg"
+
+with open(image_base, "rb") as img_file:
     my_string = base64.b64encode(img_file.read())
 print(my_string)
 # importing the requests library 
