@@ -5,8 +5,8 @@ import json
 
 # path imagenes
 
-base_image="C:/base_image.jpg"
-sample_image="C:/sample_image.jpg"
+path_base_image="C:/base_image.jpg"
+path_sample_image="C:/sample_image.jpg"
 
 # endpint Huawei Cloud
 
@@ -15,14 +15,14 @@ API_ENDPOINT_FR = "https://face.ap-southeast-1.myhuaweicloud.com/v2/061618654d80
 
 # imagen de base
 
-with open(base_image, "rb") as img_file:
-    string_base = base64.b64encode(img_file.read())
+with open(path_base_image, "rb") as img_file:
+    stringb64_base = base64.b64encode(img_file.read())
 # print(string_base)
 
 # imagen de muestra
 
-with open(sample_image, "rb") as img_file:
-    string_sample = base64.b64encode(img_file.read())
+with open(path_sample_image, "rb") as img_file:
+    stringb64_sample = base64.b64encode(img_file.read())
 # print(string_sample)
 
 # obtención del token de autorizacion
@@ -55,6 +55,10 @@ data=json.dumps((data))
 
 r = requests.post(url = API_ENDPOINT_AUTH, data = data) 
 pastebin_url = r.text 
+
+Token=r.headers
+print(Token)
+
 #print("The pastebin URL is:%s"%pastebin_url) 
 
 # request al API de Face Recognition 
