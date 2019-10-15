@@ -92,12 +92,12 @@ while 1:
 
 
     # extracting response text 
-    pastebin_url = r.text 
-    print("The pastebin URL is:%s"%pastebin_url) 
+    response_json = r.json() 
+    print("Similarity="+ str(response_json["similarity"]))
 
     dateTimeObj = datetime.now()
  
     timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
  
     print('Current Timestamp : ', timestampStr)
-    time.sleep(1)
+    time.sleep(3)
