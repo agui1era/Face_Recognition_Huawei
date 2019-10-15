@@ -12,14 +12,12 @@ while 1:
     path_base_image="C:/base_image.jpg"
     path_sample_image="C:/sample_image.jpg"
 
-    # endpint Huawei Cloud
+    # endpoint Huawei Cloud
 
     API_ENDPOINT_AUTH = "https://iam.ap-southeast-1.myhuaweicloud.com/v3/auth/tokens"
     API_ENDPOINT_FR = "https://face.ap-southeast-1.myhuaweicloud.com/v2/061618654d800fc02f6ac00fdca63540/face-compare"
 
     # imagen de base
-
-
 
     with open(path_base_image, "rb") as img_file:
         stringb64_base = base64.b64encode(img_file.read())
@@ -67,8 +65,6 @@ while 1:
     #print("The pastebin URL is:%s"%pastebin_url) 
 
     # request al API de Face Recognition 
-
-
 
     stringb64_base=str(stringb64_base)
     stringb64_sample=str(stringb64_sample)
