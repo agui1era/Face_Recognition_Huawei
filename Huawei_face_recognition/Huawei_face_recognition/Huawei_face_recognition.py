@@ -6,8 +6,10 @@ import time
 
 from datetime import datetime
 
-# path imagenes
 while 1:
+
+    
+    # path imagenes
 
     path_base_image="C:/base_image.jpg"
     path_sample_image="C:/sample_image.jpg"
@@ -17,17 +19,29 @@ while 1:
     API_ENDPOINT_AUTH = "https://iam.ap-southeast-1.myhuaweicloud.com/v3/auth/tokens"
     API_ENDPOINT_FR = "https://face.ap-southeast-1.myhuaweicloud.com/v2/061618654d800fc02f6ac00fdca63540/face-compare"
 
+    # url servidor intefaz gráfica 
+    
+    URL_SERVER="http://kognitive.cl/FR.php"
+
     # imagen de base
 
-    with open(path_base_image, "rb") as img_file:
-        stringb64_base = base64.b64encode(img_file.read())
-    # print(string_base)
+    try:
+
+         with open(path_base_image, "rb") as img_file:
+            stringb64_base = base64.b64encode(img_file.read())    
+    except:
+        print("An exception occurred with stringb64_base") 
+
 
     # imagen de muestra
 
-    with open(path_sample_image, "rb") as img_file:
+    try:
+
+     with open(path_sample_image, "rb") as img_file:
         stringb64_sample = base64.b64encode(img_file.read())
-    # print(string_sample)
+    
+    except:
+        print("An exception occurred with stringb64_sample") 
 
     # obtención del token de autorizacion
 
@@ -56,13 +70,15 @@ while 1:
     data=json.dumps((data))
 
     # sending post request and saving response as response object 
+    try:
+        r = requests.post(url = API_ENDPOINT_AUTH, data = data) 
 
-    r = requests.post(url = API_ENDPOINT_AUTH, data = data) 
+    except:
+        print("An exception occurred with token request") 
+
     pastebin_url = r.text 
 
     Token=r.headers['X-Subject-Token']
-
-    #print("The pastebin URL is:%s"%pastebin_url) 
 
     # request al API de Face Recognition 
 
@@ -77,17 +93,17 @@ while 1:
 
     data=json.dumps((data))
 
-    #print(data)
-
     headers={"Content-Type":"application/json","X-Auth-Token":Token}
 
-    #headers=json.dumps((headers))
+    try:
 
-    #print(headers)
-    r = requests.post(url = API_ENDPOINT_FR, data = data,headers=headers) 
+       r = requests.post(url = API_ENDPOINT_FR, data = data,headers=headers) 
 
+    except:
+        print("An exception occurred with request api FR") 
 
     # extracting response text 
+
     response_json = r.json() 
     print("Similarity="+ str(response_json["similarity"]))
 
@@ -96,4 +112,12 @@ while 1:
     timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
  
     print('Current Timestamp : ', timestampStr)
+
+    #envío hacía el servidor 
+
+
+    r = requests.get(url = URL_SERVER)
+
+    print(r)
+
     time.sleep(3)
