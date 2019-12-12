@@ -19,7 +19,7 @@ while 1:
     API_ENDPOINT_AUTH = "https://iam.ap-southeast-1.myhuaweicloud.com/v3/auth/tokens"
     API_ENDPOINT_FR = "https://face.ap-southeast-1.myhuaweicloud.com/v2/061618654d800fc02f6ac00fdca63540/face-compare"
 
-    # url servidor intefaz gráfica 
+    # url servidor interfaz gráfica 
     
     URL_SERVER="http://kognitive.cl/FR.php"
 
